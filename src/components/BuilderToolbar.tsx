@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { useBuilder } from '@/context/BuilderContext';
@@ -6,6 +5,8 @@ import { Smartphone, Tablet, Monitor, Download, Save, Undo, Redo } from 'lucide-
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useToast } from '@/hooks/use-toast';
 import { toast } from 'sonner';
+import { useAuth } from '@/context/AuthContext';
+import { LogOut } from 'lucide-react';
 
 interface BuilderToolbarProps {
   deviceView: 'desktop' | 'tablet' | 'mobile';
@@ -15,6 +16,7 @@ interface BuilderToolbarProps {
 const BuilderToolbar: React.FC<BuilderToolbarProps> = ({ deviceView, setDeviceView }) => {
   const { elements, undo, redo, history, historyIndex } = useBuilder();
   const { toast: uiToast } = useToast();
+  const { logout, user } = useAuth();
   
   const handleSave = () => {
     try {
@@ -148,6 +150,28 @@ const BuilderToolbar: React.FC<BuilderToolbarProps> = ({ deviceView, setDeviceVi
         </TooltipTrigger>
         <TooltipContent>تصدير التصميم</TooltipContent>
       </Tooltip>
+      
+      <div className="flex-1" />
+      
+      {user && (
+        <>
+          <div className="flex items-center gap-2 ml-4">
+            <span className="text-sm">{user.name}</span>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  size="icon"
+                  onClick={logout}
+                >
+                  <LogOut size={18} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>تسجيل الخروج</TooltipContent>
+            </Tooltip>
+          </div>
+        </>
+      )}
     </div>
   );
 };

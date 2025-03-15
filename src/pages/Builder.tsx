@@ -4,7 +4,9 @@ import { BuilderProvider } from '@/context/BuilderContext';
 import BuilderSidebar from '@/components/BuilderSidebar';
 import BuilderCanvas from '@/components/BuilderCanvas';
 import BuilderToolbar from '@/components/BuilderToolbar';
+import TemplateGallery from '@/components/TemplateGallery';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from 'sonner';
 
 const Builder = () => {
@@ -31,7 +33,20 @@ const Builder = () => {
         
         <ResizablePanelGroup direction="horizontal" className="flex-1">
           <ResizablePanel defaultSize={25} minSize={20} maxSize={40}>
-            <BuilderSidebar />
+            <Tabs defaultValue="elements">
+              <TabsList className="grid grid-cols-2 gap-4 p-2">
+                <TabsTrigger value="elements">العناصر</TabsTrigger>
+                <TabsTrigger value="templates">القوالب</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="elements" className="m-0">
+                <BuilderSidebar />
+              </TabsContent>
+              
+              <TabsContent value="templates" className="m-0">
+                <TemplateGallery />
+              </TabsContent>
+            </Tabs>
           </ResizablePanel>
           
           <ResizableHandle withHandle />
