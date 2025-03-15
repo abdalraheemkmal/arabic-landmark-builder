@@ -19,9 +19,6 @@ export default {
 			}
 		},
 		extend: {
-			rotate: {
-				'30': '30deg',
-			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
