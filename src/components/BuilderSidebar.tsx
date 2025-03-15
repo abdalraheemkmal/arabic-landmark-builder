@@ -11,7 +11,13 @@ import {
   PanelLeft, 
   MessageSquare, 
   Megaphone,
-  ChevronDown
+  ChevronDown,
+  Trash,
+  Copy,
+  ArrowUp,
+  ArrowDown,
+  Save,
+  Download
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -21,7 +27,8 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ColorPicker } from '@/components/ui/color-picker';
+import StylesEditor from './StylesEditor';
+import { toast } from 'sonner';
 
 interface ElementOption {
   type: ElementType;
@@ -37,7 +44,8 @@ const BuilderSidebar = () => {
     updateElement, 
     removeElement,
     duplicateElement,
-    moveElement
+    moveElement,
+    clearDesign
   } = useBuilder();
   
   const [language, setLanguage] = useState<'ar' | 'en'>('ar');
@@ -66,8 +74,65 @@ const BuilderSidebar = () => {
 
   const activeElement = elements.find(el => el.id === activeElementId);
 
+  const handleClearDesign = () => {
+    if (window.confirm('هل أنت متأكد من رغبتك في مسح جميع العناصر؟')) {
+      clearDesign();
+      toast.success('تم مسح جميع العناصر بنجاح');
+    }
+  };
+
+  const handleExportHTML = () => {
+    try {
+      // Simple HTML generation for demo
+      let html = '<!DOCTYPE html>\n<html lang="ar" dir="rtl">\n<head>\n';
+      html += '  <meta charset="UTF-8">\n';
+      html += '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n';
+      html += '  <title>الصفحة المصممة</title>\n';
+      html += '  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">\n';
+      html += '</head>\n<body class="rtl">\n';
+      html += '  <div class="container mx-auto px-4 py-8">\n';
+      
+      // Add elements
+      elements.forEach(el => {
+        if (el.type === 'heading') {
+          const level = el.props?.level || 'h2';
+          const alignment = el.props?.alignment || 'left';
+          html += `    <${level} class="font-bold text-${alignment}">${el.content || ''}</${level}>\n`;
+        } else if (el.type === 'paragraph') {
+          const alignment = el.props?.alignment || 'left';
+          html += `    <p class="text-gray-700 text-${alignment}">${el.content || ''}</p>\n`;
+        } else if (el.type === 'button') {
+          html += `    <button class="px-4 py-2 bg-blue-500 text-white rounded">${el.content || ''}</button>\n`;
+        } else if (el.type === 'image') {
+          html += `    <img src="${el.props?.src || '/placeholder.svg'}" alt="${el.props?.alt || 'صورة'}" class="max-w-full">\n`;
+        } else if (el.type === 'spacer') {
+          html += `    <div style="height: ${el.props?.height || 32}px;"></div>\n`;
+        } else if (el.type === 'divider') {
+          html += `    <hr>\n`;
+        }
+      });
+      
+      html += '  </div>\n</body>\n</html>';
+      
+      // Create download link
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'exported-page.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      toast.success('تم تصدير الصفحة بنجاح');
+    } catch (error) {
+      toast.error('حدث خطأ أثناء تصدير الصفحة');
+    }
+  };
+
   return (
-    <div className="w-72 h-screen bg-white border-r border-gray-200 flex flex-col overflow-hidden">
+    <div className="w-full h-screen bg-white border-r border-gray-200 flex flex-col overflow-hidden">
       <div className="p-4 border-b border-gray-200">
         <h2 className="text-lg font-semibold">
           {language === 'ar' ? 'منشئ الصفحات' : 'Page Builder'}
@@ -125,6 +190,32 @@ const BuilderSidebar = () => {
                 </div>
               </AccordionContent>
             </AccordionItem>
+            
+            <AccordionItem value="actions">
+              <AccordionTrigger className="py-3">
+                {language === 'ar' ? 'إجراءات' : 'Actions'}
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-2">
+                  <Button 
+                    variant="outline" 
+                    className="w-full justify-start" 
+                    onClick={handleExportHTML}
+                  >
+                    <Download size={16} className="mr-2" />
+                    {language === 'ar' ? 'تصدير كـ HTML' : 'Export as HTML'}
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full justify-start text-destructive hover:text-destructive" 
+                    onClick={handleClearDesign}
+                  >
+                    <Trash size={16} className="mr-2" />
+                    {language === 'ar' ? 'مسح جميع العناصر' : 'Clear All Elements'}
+                  </Button>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
           </Accordion>
         </TabsContent>
         
@@ -142,6 +233,7 @@ const BuilderSidebar = () => {
                     onClick={() => duplicateElement(activeElement.id)}
                     className="h-8 px-2"
                   >
+                    <Copy size={14} className="mr-1" />
                     {language === 'ar' ? 'نسخ' : 'Copy'}
                   </Button>
                   <Button 
@@ -150,6 +242,7 @@ const BuilderSidebar = () => {
                     onClick={() => removeElement(activeElement.id)}
                     className="h-8 px-2"
                   >
+                    <Trash size={14} className="mr-1" />
                     {language === 'ar' ? 'حذف' : 'Delete'}
                   </Button>
                 </div>
@@ -162,7 +255,8 @@ const BuilderSidebar = () => {
                   onClick={() => moveElement(activeElement.id, 'up')}
                   className="flex-1 h-8"
                 >
-                  {language === 'ar' ? 'تحريك لأعلى' : 'Move Up'}
+                  <ArrowUp size={14} className="mr-1" />
+                  {language === 'ar' ? 'لأعلى' : 'Up'}
                 </Button>
                 <Button 
                   variant="outline" 
@@ -170,7 +264,8 @@ const BuilderSidebar = () => {
                   onClick={() => moveElement(activeElement.id, 'down')}
                   className="flex-1 h-8"
                 >
-                  {language === 'ar' ? 'تحريك لأسفل' : 'Move Down'}
+                  <ArrowDown size={14} className="mr-1" />
+                  {language === 'ar' ? 'لأسفل' : 'Down'}
                 </Button>
               </div>
               
@@ -212,35 +307,6 @@ const BuilderSidebar = () => {
                       </SelectContent>
                     </Select>
                   </div>
-                  
-                  <div>
-                    <Label htmlFor="heading-alignment">
-                      {language === 'ar' ? 'محاذاة' : 'Alignment'}
-                    </Label>
-                    <Select
-                      value={activeElement.props?.alignment || 'left'}
-                      onValueChange={(value) => 
-                        updateElement(activeElement.id, { 
-                          props: { ...activeElement.props, alignment: value } 
-                        })
-                      }
-                    >
-                      <SelectTrigger id="heading-alignment">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="left">
-                          {language === 'ar' ? 'يسار' : 'Left'}
-                        </SelectItem>
-                        <SelectItem value="center">
-                          {language === 'ar' ? 'وسط' : 'Center'}
-                        </SelectItem>
-                        <SelectItem value="right">
-                          {language === 'ar' ? 'يمين' : 'Right'}
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
                 </div>
               )}
               
@@ -256,38 +322,6 @@ const BuilderSidebar = () => {
                       value={activeElement.content || ''}
                       onChange={(e) => updateElement(activeElement.id, { content: e.target.value })}
                     />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="paragraph-alignment">
-                      {language === 'ar' ? 'محاذاة' : 'Alignment'}
-                    </Label>
-                    <Select
-                      value={activeElement.props?.alignment || 'left'}
-                      onValueChange={(value) => 
-                        updateElement(activeElement.id, { 
-                          props: { ...activeElement.props, alignment: value } 
-                        })
-                      }
-                    >
-                      <SelectTrigger id="paragraph-alignment">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="left">
-                          {language === 'ar' ? 'يسار' : 'Left'}
-                        </SelectItem>
-                        <SelectItem value="center">
-                          {language === 'ar' ? 'وسط' : 'Center'}
-                        </SelectItem>
-                        <SelectItem value="right">
-                          {language === 'ar' ? 'يمين' : 'Right'}
-                        </SelectItem>
-                        <SelectItem value="justify">
-                          {language === 'ar' ? 'ضبط' : 'Justify'}
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
                   </div>
                 </div>
               )}
@@ -500,6 +534,9 @@ const BuilderSidebar = () => {
                   </div>
                 </div>
               )}
+              
+              {/* Add the new StylesEditor component */}
+              <StylesEditor />
             </div>
           ) : (
             <div className="text-center p-6 text-gray-500">
@@ -512,8 +549,8 @@ const BuilderSidebar = () => {
       </Tabs>
       
       <div className="p-4 border-t border-gray-200">
-        <Button className="w-full btn-primary">
-          {language === 'ar' ? 'حفظ ومعاينة' : 'Save & Preview'}
+        <Button className="w-full btn-primary" onClick={handleExportHTML}>
+          {language === 'ar' ? 'تصدير الصفحة' : 'Export Page'}
         </Button>
       </div>
     </div>

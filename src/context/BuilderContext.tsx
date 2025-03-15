@@ -1,5 +1,5 @@
 
-import { createContext, useState, useContext, ReactNode } from 'react';
+import { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 // Define element types
 export type ElementType = 
@@ -39,6 +39,8 @@ interface BuilderContextType {
   historyIndex: number;
   undo: () => void;
   redo: () => void;
+  loadSavedDesign: () => boolean;
+  clearDesign: () => void;
 }
 
 // Create the context
@@ -51,6 +53,33 @@ export const BuilderProvider = ({ children }: { children: ReactNode }) => {
   const [history, setHistory] = useState<Array<BuilderElement[]>>([[]]);
   const [historyIndex, setHistoryIndex] = useState(0);
 
+  // Try to load saved design on mount
+  useEffect(() => {
+    loadSavedDesign();
+  }, []);
+
+  // Load a saved design from localStorage
+  const loadSavedDesign = (): boolean => {
+    try {
+      const savedElements = localStorage.getItem('builderElements');
+      if (savedElements) {
+        const parsedElements = JSON.parse(savedElements);
+        updateElementsWithHistory(parsedElements);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Error loading saved design:', error);
+      return false;
+    }
+  };
+
+  // Clear the current design
+  const clearDesign = () => {
+    updateElementsWithHistory([]);
+    setActiveElementId(null);
+  };
+
   // Add a new element to the builder
   const addElement = (type: ElementType, props: Record<string, any> = {}) => {
     const newElement: BuilderElement = {
@@ -60,11 +89,11 @@ export const BuilderProvider = ({ children }: { children: ReactNode }) => {
     };
     
     if (type === 'heading') {
-      newElement.content = 'Click to edit heading';
+      newElement.content = 'انقر لتعديل العنوان';
     } else if (type === 'paragraph') {
-      newElement.content = 'Click to edit paragraph text. You can add descriptions, information, or any text content here.';
+      newElement.content = 'انقر لتعديل نص الفقرة. يمكنك إضافة وصف أو معلومات أو أي محتوى نصي هنا.';
     } else if (type === 'button') {
-      newElement.content = 'Click Me';
+      newElement.content = 'انقر هنا';
       newElement.props = { ...newElement.props, variant: 'primary', size: 'default' };
     }
     
@@ -175,6 +204,8 @@ export const BuilderProvider = ({ children }: { children: ReactNode }) => {
         historyIndex,
         undo,
         redo,
+        loadSavedDesign,
+        clearDesign,
       }}
     >
       {children}

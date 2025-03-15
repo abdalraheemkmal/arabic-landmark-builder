@@ -8,6 +8,31 @@ interface BuilderElementProps {
 }
 
 const BuilderElement: React.FC<BuilderElementProps> = ({ element }) => {
+  // Extract styles from props if they exist
+  const styles = element.props?.styles || {};
+  
+  // Generate inline styles object
+  const elementStyles = {
+    color: styles.color,
+    backgroundColor: styles.backgroundColor,
+    fontSize: styles.fontSize ? `${styles.fontSize}px` : undefined,
+    fontWeight: styles.fontWeight,
+    fontStyle: styles.fontStyle,
+    textDecoration: styles.textDecoration,
+    marginTop: styles.marginTop ? `${styles.marginTop}px` : undefined,
+    marginBottom: styles.marginBottom ? `${styles.marginBottom}px` : undefined,
+    marginLeft: styles.marginLeft ? `${styles.marginLeft}px` : undefined,
+    marginRight: styles.marginRight ? `${styles.marginRight}px` : undefined,
+    paddingTop: styles.paddingTop ? `${styles.paddingTop}px` : undefined,
+    paddingBottom: styles.paddingBottom ? `${styles.paddingBottom}px` : undefined,
+    paddingLeft: styles.paddingLeft ? `${styles.paddingLeft}px` : undefined,
+    paddingRight: styles.paddingRight ? `${styles.paddingRight}px` : undefined,
+    borderWidth: styles.borderWidth ? `${styles.borderWidth}px` : undefined,
+    borderStyle: styles.borderStyle,
+    borderColor: styles.borderColor,
+    borderRadius: styles.borderRadius ? `${styles.borderRadius}px` : undefined,
+  };
+  
   const renderElement = () => {
     switch (element.type) {
       case 'heading':
@@ -19,6 +44,7 @@ const BuilderElement: React.FC<BuilderElementProps> = ({ element }) => {
               element.props?.alignment === 'center' && "text-center",
               element.props?.alignment === 'right' && "text-right"
             )}
+            style={elementStyles}
           >
             {element.content}
           </HeadingTag>
@@ -31,7 +57,9 @@ const BuilderElement: React.FC<BuilderElementProps> = ({ element }) => {
             element.props?.alignment === 'center' && "text-center",
             element.props?.alignment === 'right' && "text-right",
             element.props?.alignment === 'justify' && "text-justify"
-          )}>
+          )}
+          style={elementStyles}
+          >
             {element.content}
           </p>
         );
@@ -48,6 +76,7 @@ const BuilderElement: React.FC<BuilderElementProps> = ({ element }) => {
               element.props?.size === 'sm' && "text-sm py-1",
               element.props?.size === 'lg' && "text-lg py-3"
             )}
+            style={elementStyles}
           >
             {element.content}
           </button>
@@ -59,12 +88,16 @@ const BuilderElement: React.FC<BuilderElementProps> = ({ element }) => {
             src={element.props?.src || '/placeholder.svg'} 
             alt={element.props?.alt || 'صورة'} 
             className="max-w-full h-auto"
+            style={elementStyles}
           />
         );
         
       case 'spacer':
         return (
-          <div style={{ height: `${element.props?.height || 32}px` }} />
+          <div style={{ 
+            height: `${element.props?.height || 32}px`,
+            ...elementStyles 
+          }} />
         );
         
       case 'divider':
@@ -73,20 +106,21 @@ const BuilderElement: React.FC<BuilderElementProps> = ({ element }) => {
             element.props?.lineStyle === 'dashed' && "border-dashed",
             element.props?.lineStyle === 'dotted' && "border-dotted"
           )} style={{ 
-            borderTopWidth: `${element.props?.thickness || 1}px` 
+            borderTopWidth: `${element.props?.thickness || 1}px`,
+            ...elementStyles 
           }} />
         );
         
       case 'container':
         return (
-          <div className="p-4 border rounded-md">
+          <div className="p-4 border rounded-md" style={elementStyles}>
             <p className="text-center text-muted-foreground">حاوية</p>
           </div>
         );
         
       case 'hero':
         return (
-          <div className="py-12 px-6 bg-muted/30 text-center space-y-4 rounded-md">
+          <div className="py-12 px-6 bg-muted/30 text-center space-y-4 rounded-md" style={elementStyles}>
             <h2 className="text-3xl font-bold">عنوان القسم الرئيسي</h2>
             <p className="max-w-2xl mx-auto">وصف القسم الرئيسي الخاص بك. أضف هنا المزيد من المعلومات.</p>
             <button className="px-4 py-2 bg-primary text-primary-foreground rounded">زر الدعوة للعمل</button>
@@ -95,7 +129,7 @@ const BuilderElement: React.FC<BuilderElementProps> = ({ element }) => {
         
       case 'features':
         return (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8" style={elementStyles}>
             {[1, 2, 3].map((i) => (
               <div key={i} className="p-4 border rounded-md text-center">
                 <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -110,7 +144,7 @@ const BuilderElement: React.FC<BuilderElementProps> = ({ element }) => {
         
       case 'testimonial':
         return (
-          <div className="p-6 bg-muted/20 rounded-md text-center">
+          <div className="p-6 bg-muted/20 rounded-md text-center" style={elementStyles}>
             <div className="w-16 h-16 bg-muted rounded-full mx-auto mb-4"></div>
             <p className="italic mb-4">"شهادة العميل هنا. كلمات إيجابية حول المنتج أو الخدمة."</p>
             <p className="font-bold">- اسم العميل</p>
@@ -120,7 +154,7 @@ const BuilderElement: React.FC<BuilderElementProps> = ({ element }) => {
         
       case 'cta':
         return (
-          <div className="py-10 px-6 bg-primary/10 rounded-md text-center space-y-4">
+          <div className="py-10 px-6 bg-primary/10 rounded-md text-center space-y-4" style={elementStyles}>
             <h3 className="text-2xl font-bold">دعوة للعمل</h3>
             <p>أضف هنا رسالة مقنعة لدعوة المستخدمين للقيام بإجراء.</p>
             <button className="px-6 py-2 bg-primary text-primary-foreground rounded-md">اتصل بنا</button>
