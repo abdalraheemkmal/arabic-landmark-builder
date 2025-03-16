@@ -1,17 +1,9 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
 
 export default function Hero() {
-  const [language, setLanguage] = useState<'ar' | 'en'>('ar');
-  
-  useEffect(() => {
-    const htmlLang = document.documentElement.lang;
-    setLanguage(htmlLang === 'en' ? 'en' : 'ar');
-  }, []);
-
   return (
     <div className="relative overflow-hidden bg-background">
       {/* Background gradient elements */}
@@ -19,81 +11,75 @@ export default function Hero() {
       
       <div className="mx-auto px-4 py-12 md:py-20 lg:py-24 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left column - Text content */}
-          <div className="space-y-8">
+          {/* Right column - Text content */}
+          <div className="space-y-8 order-2 lg:order-1 text-right">
             <div>
               <span className="inline-block mb-2 px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full">
-                {language === 'ar' ? '🚀 حل متكامل لتحويل الزوار إلى عملاء' : '🚀 Complete Solution to Convert Visitors to Customers'}
+                🚀 الحل الشامل لتحويل الزوار إلى عملاء
               </span>
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
-                {language === 'ar' 
-                  ? 'أنشئ صفحات قمع تسويقي تزيد المبيعات!' 
-                  : 'Create Sales Funnels That Multiply Your Revenue!'}
+                أنشئ صفحات قمع تسويقي تضاعف مبيعاتك!
               </h1>
               
               <p className="text-xl text-muted-foreground">
-                {language === 'ar' 
-                  ? 'منصة شاملة لتصميم صفحات القمع التسويقي التي تحول الزائرين إلى عملاء بسهولة. لا تحتاج لأي خبرة في البرمجة.' 
-                  : 'All-in-one platform to design sales funnel pages that convert visitors into customers. No coding experience required.'}
+                منصة متكاملة لتصميم صفحات القمع التسويقي التي تحول الزائرين إلى عملاء دون الحاجة لخبرة برمجية.
               </p>
             </div>
             
             <div>
               <ul className="space-y-3">
                 {[
-                  language === 'ar' ? 'منشئ صفحات بالسحب والإفلات' : 'Drag & Drop Page Builder',
-                  language === 'ar' ? 'قوالب احترافية جاهزة للاستخدام' : 'Professional Ready-to-Use Templates',
-                  language === 'ar' ? 'تكامل مع أنظمة الدفع الإلكتروني' : 'Payment Processor Integration',
-                  language === 'ar' ? 'تحليلات متقدمة للمبيعات والتحويل' : 'Advanced Sales & Conversion Analytics'
+                  'منشئ صفحات بالسحب والإفلات',
+                  'أكثر من 500 قالب احترافي جاهز',
+                  'تكامل مع بوابات الدفع الإلكتروني',
+                  'تحليلات متقدمة للمبيعات والتحويل'
                 ].map((feature, index) => (
-                  <li key={index} className="flex items-center">
-                    <span className="flex-shrink-0 p-1 rounded-full bg-primary/10 text-primary mr-3">
+                  <li key={index} className="flex items-center justify-end">
+                    <span className="text-base">{feature}</span>
+                    <span className="flex-shrink-0 p-1 rounded-full bg-primary/10 text-primary mr-3 ml-3">
                       <Check size={16} />
                     </span>
-                    <span className="text-base">{feature}</span>
                   </li>
                 ))}
               </ul>
             </div>
             
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="px-8 rounded-full shadow-lg hover:shadow-primary/20 hover:scale-105 transition-all" asChild>
-                <Link to="/register">
-                  {language === 'ar' ? 'ابدأ مجاناً الآن' : 'Start Free Now'} <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
+            <div className="flex flex-wrap gap-4 justify-end">
               <Button variant="outline" size="lg" className="px-8 rounded-full hover:bg-primary/5" asChild>
                 <a href="#features">
-                  {language === 'ar' ? 'تعرف على الميزات' : 'Explore Features'}
+                  تعرف على الميزات
                 </a>
+              </Button>
+              <Button size="lg" className="px-8 rounded-full shadow-lg hover:shadow-primary/20 hover:scale-105 transition-all" asChild>
+                <Link to="/register">
+                  ابدأ مجاناً الآن <ArrowRight className="mr-2 h-5 w-5" />
+                </Link>
               </Button>
             </div>
             
-            <div className="text-muted-foreground text-sm">
-              {language === 'ar' 
-                ? 'لا حاجة لبطاقة ائتمان • إلغاء الاشتراك في أي وقت • دعم فني على مدار الساعة' 
-                : 'No credit card required • Cancel anytime • 24/7 support'}
+            <div className="text-muted-foreground text-sm text-right">
+              لا حاجة لبطاقة ائتمان • إلغاء الاشتراك في أي وقت • دعم فني على مدار الساعة
             </div>
           </div>
           
-          {/* Right column - Dashboard preview */}
-          <div className="relative">
+          {/* Left column - Dashboard preview */}
+          <div className="relative order-1 lg:order-2">
             <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-400 rounded-lg blur opacity-30"></div>
             <div className="relative bg-white/5 backdrop-blur-sm rounded-lg overflow-hidden border border-white/10 shadow-2xl">
               <img 
                 src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80" 
-                alt="Dashboard Preview" 
+                alt="لقطة من لوحة التحكم" 
                 className="w-full h-auto rounded-lg hover:scale-105 transition-transform duration-700"
               />
             </div>
             
             {/* Testimonial badge */}
-            <div className="absolute -bottom-6 -right-6 bg-white shadow-lg rounded-lg p-3 max-w-[250px] border border-gray-100">
+            <div className="absolute -bottom-6 -right-6 bg-white shadow-lg rounded-lg p-3 max-w-[250px] border border-gray-100 rtl">
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
-                    {language === 'ar' ? 'م.أ' : 'J.D'}
+                    م.أ
                   </div>
                 </div>
                 <div>
@@ -104,10 +90,8 @@ export default function Hero() {
                       </svg>
                     ))}
                   </div>
-                  <p className="text-xs text-muted-foreground">
-                    {language === 'ar' 
-                      ? '"زاد معدل التحويل لدي بنسبة 320% في أول شهرين من استخدام المنصة!"' 
-                      : '"Increased my conversion rate by 320% in the first two months of using the platform!"'}
+                  <p className="text-xs text-muted-foreground text-right">
+                    "زاد معدل التحويل لدي بنسبة 320% في أول شهرين من استخدام المنصة!"
                   </p>
                 </div>
               </div>
@@ -118,7 +102,7 @@ export default function Hero() {
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">+480%</div>
                 <div className="text-xs text-muted-foreground">
-                  {language === 'ar' ? 'متوسط زيادة المبيعات' : 'Avg. Sales Increase'}
+                  متوسط زيادة المبيعات
                 </div>
               </div>
             </div>
