@@ -1,8 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
+import AppsSection from "@/components/AppsSection";
 import Testimonials from "@/components/Testimonials";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, ChevronRight } from "lucide-react";
@@ -107,7 +107,6 @@ const Index = () => {
     },
   ];
 
-  // How It Works steps
   const steps = [
     {
       number: "01",
@@ -178,6 +177,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+        
+        {/* Apps Section */}
+        <AppsSection />
         
         {/* How It Works Section */}
         <section className="py-16 md:py-24 bg-white">
