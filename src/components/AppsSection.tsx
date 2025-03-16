@@ -5,7 +5,7 @@ import {
   LayoutDashboard, 
   FileText, 
   Timer, 
-  Graduation,
+  GraduationCap,
   Play
 } from "lucide-react";
 
@@ -108,7 +108,7 @@ const AppsSection = () => {
       description: language === 'ar' 
         ? 'حول معرفتك وشغفك وخبرتك إلى إيرادات.' 
         : 'Turn your knowledge, passion or experience into revenue.',
-      icon: <Graduation className="h-5 w-5" />,
+      icon: <GraduationCap className="h-5 w-5" />,
       color: 'bg-red-100',
       image: (
         <div className="bg-white rounded-md p-4 shadow-sm relative">
