@@ -1,13 +1,16 @@
 
 import { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { 
   LayoutDashboard, 
   FileText, 
   Timer, 
   GraduationCap,
-  Play
+  Play,
+  ArrowRight
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const AppsSection = () => {
   const [language, setLanguage] = useState<'ar' | 'en'>('ar');
@@ -19,156 +22,181 @@ const AppsSection = () => {
 
   const apps = [
     {
-      title: language === 'ar' ? 'صفحات الهبوط' : 'Landing Pages',
-      description: language === 'ar' 
-        ? 'إنشاء صفحات هبوط لموقعك أو قمعك التسويقي.' 
-        : 'Create landing pages for your website or your funnels.',
+      id: "funnel",
+      title: language === 'ar' ? 'قمعك التسويقي' : 'Your Funnel',
       icon: <LayoutDashboard className="h-5 w-5" />,
       color: 'bg-blue-100',
-      image: (
-        <div className="bg-white rounded-md p-4 shadow-sm relative">
-          <div className="flex space-x-2 rtl:space-x-reverse mb-3">
-            <div className="w-24 h-20 bg-blue-200 rounded flex items-center justify-center">
-              <Play className="h-8 w-8 text-white" />
-            </div>
-            <div className="space-y-2 flex-1">
-              <div className="w-full h-3 bg-gray-100 rounded"></div>
-              <div className="w-3/4 h-3 bg-gray-100 rounded"></div>
-              <div className="w-1/2 h-3 bg-gray-100 rounded"></div>
-            </div>
-          </div>
-          <div className="w-full h-3 bg-gray-100 rounded mb-2"></div>
-          <div className="w-full h-3 bg-gray-100 rounded mb-2"></div>
-          <div className="w-3/4 h-3 bg-gray-100 rounded mb-4"></div>
-          <div className="w-full h-10 bg-blue-300 rounded-full flex items-center justify-center text-white font-medium">
-            {language === 'ar' ? 'اشترك الآن' : 'Buy Now'}
-          </div>
-        </div>
-      )
+      description: language === 'ar' 
+        ? 'حول زوار موقعك إلى عملاء يدفعون مع أفضل منشئ قمع تسويقي على الإطلاق. سهل الاستخدام وسريع بشكل لا يصدق ومُحسّن لتحويل النقرات إلى مبيعات.' 
+        : 'Convert your online visitors into paying customers with the best funnel builder on the planet. Easy to use, incredibly fast, and optimized to turn clicks into cash.',
+      cta: language === 'ar' ? 'جرّب مجاناً' : 'Try for Free',
+      features: [
+        language === 'ar' ? 'سهل الاستخدام' : 'Easy to use',
+        language === 'ar' ? 'سريع بشكل مذهل' : 'Incredibly fast',
+        language === 'ar' ? 'محسن للتحويل' : 'Optimized for conversions'
+      ]
     },
     {
-      title: language === 'ar' ? 'استبيانات تفاعلية' : 'Survey Workflows',
-      description: language === 'ar' 
-        ? 'احصل على البيانات واستفد منها لزيادة المبيعات والتحويلات.' 
-        : 'Get data, and leverage that data to increase sales and conversions.',
+      id: "store",
+      title: language === 'ar' ? 'متجرك الإلكتروني' : 'Your Store',
       icon: <FileText className="h-5 w-5" />,
       color: 'bg-olive-100',
-      image: (
-        <div className="bg-white rounded-md p-4 shadow-sm">
-          {[1, 2, 3].map((item, index) => (
-            <div key={index} className="flex items-center mb-6">
-              <div className="w-6 h-6 rounded-full bg-olive-300 flex items-center justify-center text-white mr-3 rtl:ml-3 rtl:mr-0">?</div>
-              <div className="flex-1 h-3 bg-gray-200 rounded"></div>
-            </div>
-          ))}
-          <div className="flex justify-center">
-            <div className="w-8 h-8 bg-olive-300 rounded flex items-center justify-center text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      )
+      description: language === 'ar' 
+        ? 'قم بإنشاء متجر إلكتروني احترافي بسهولة تامة. بيع المنتجات الرقمية أو المادية، وإدارة المخزون، واستلام المدفوعات مباشرة. المتجر الذي ينمو مع نمو أعمالك.' 
+        : 'Create a professional e-commerce store with complete ease. Sell digital or physical products, manage inventory, and receive payments directly. A store that grows as your business grows.',
+      cta: language === 'ar' ? 'أنشئ متجرك' : 'Create Your Store',
+      features: [
+        language === 'ar' ? 'بيع المنتجات الرقمية والمادية' : 'Sell digital and physical products',
+        language === 'ar' ? 'إدارة المخزون بسهولة' : 'Easy inventory management',
+        language === 'ar' ? 'معالجة الدفع المباشر' : 'Direct payment processing'
+      ]
     },
     {
-      title: language === 'ar' ? 'عدادات تنازلية' : 'Countdown Funnels',
-      description: language === 'ar' 
-        ? 'أضف عداد تنازلي لأي عرض لتحفيز العملاء المحتملين على التصرف الآن.' 
-        : 'Add a countdown timer to any offer to get prospects to act now.',
+      id: "crm",
+      title: language === 'ar' ? 'إدارة علاقات العملاء' : 'Your CRM',
       icon: <Timer className="h-5 w-5" />,
       color: 'bg-orange-100',
-      image: (
-        <div className="flex flex-col items-center">
-          <div className="bg-orange-100 p-4 rounded-lg mb-4">
-            <div className="bg-white rounded-lg p-2 shadow-sm">
-              <div className="text-center text-orange-400 text-5xl font-bold">31</div>
-            </div>
-          </div>
-          <div className="grid grid-cols-4 gap-2 w-full">
-            {['00', '23', '59', '43'].map((num, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <div className="bg-white rounded p-2 w-12 h-12 flex items-center justify-center text-lg font-semibold shadow-sm">
-                  {num}
-                </div>
-                <div className="text-xs text-gray-500 mt-1">
-                  {index === 0 ? (language === 'ar' ? 'أيام' : 'Days') : ''}
-                  {index === 1 ? (language === 'ar' ? 'ساعات' : 'Hours') : ''}
-                  {index === 2 ? (language === 'ar' ? 'دقائق' : 'Minutes') : ''}
-                  {index === 3 ? (language === 'ar' ? 'ثواني' : 'Seconds') : ''}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )
+      description: language === 'ar' 
+        ? 'تتبع وإدارة جميع تفاعلات العملاء في مكان واحد. تعرف على عملائك بشكل أفضل، وحسّن اتصالاتك، وزد من المبيعات من خلال فهم احتياجات عملائك بشكل أعمق.' 
+        : 'Track and manage all customer interactions in one place. Get to know your customers better, improve your communications, and increase sales by understanding your customers\' needs more deeply.',
+      cta: language === 'ar' ? 'ابدأ التتبع' : 'Start Tracking',
+      features: [
+        language === 'ar' ? 'تتبع تفاعلات العملاء' : 'Track customer interactions',
+        language === 'ar' ? 'تحسين التواصل' : 'Improve communications',
+        language === 'ar' ? 'زيادة المبيعات' : 'Increase sales'
+      ]
     },
     {
-      title: language === 'ar' ? 'دورات تعليمية' : 'Courses',
+      id: "email",
+      title: language === 'ar' ? 'التسويق عبر البريد الإلكتروني' : 'Your Email Marketing',
+      icon: <FileText className="h-5 w-5" />,
+      color: 'bg-green-100',
       description: language === 'ar' 
-        ? 'حول معرفتك وشغفك وخبرتك إلى إيرادات.' 
-        : 'Turn your knowledge, passion or experience into revenue.',
+        ? 'أرسل رسائل بريد إلكتروني مستهدفة لجمهورك المناسب في الوقت المناسب. قم بإنشاء حملات بريد إلكتروني تلقائية، وقياس النتائج، وتحسين معدلات الفتح والنقر.' 
+        : 'Send targeted emails to the right audience at the right time. Create automated email campaigns, measure results, and improve open and click-through rates.',
+      cta: language === 'ar' ? 'أرسل حملتك الأولى' : 'Send Your First Campaign',
+      features: [
+        language === 'ar' ? 'رسائل بريد إلكتروني مستهدفة' : 'Targeted emails',
+        language === 'ar' ? 'حملات تلقائية' : 'Automated campaigns',
+        language === 'ar' ? 'تحليلات مفصلة' : 'Detailed analytics'
+      ]
+    },
+    {
+      id: "courses",
+      title: language === 'ar' ? 'دوراتك التعليمية' : 'Your Online Courses',
       icon: <GraduationCap className="h-5 w-5" />,
       color: 'bg-red-100',
-      image: (
-        <div className="bg-white rounded-md p-4 shadow-sm relative">
-          <div className="w-full h-40 bg-red-200 rounded-md flex items-center justify-center mb-4">
-            <Play className="h-12 w-12 text-white" />
-          </div>
-          <div className="space-y-2">
-            <div className="w-full h-3 bg-gray-100 rounded"></div>
-            <div className="w-full h-3 bg-gray-100 rounded"></div>
-            <div className="w-3/4 h-3 bg-gray-100 rounded"></div>
-            <div className="w-1/2 h-3 bg-gray-100 rounded"></div>
-          </div>
-          <div className="absolute bottom-6 right-6 rtl:left-6 rtl:right-auto">
-            <div className="h-8 w-16 bg-red-500 rounded-full flex items-center justify-center text-white text-xs">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="M12 5v14"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      )
+      description: language === 'ar' 
+        ? 'حول معرفتك وخبرتك إلى دورات تعليمية عبر الإنترنت. قم بإنشاء وبيع الدورات التدريبية، وتتبع تقدم الطلاب، وبناء مجتمع تعليمي حول خبرتك.' 
+        : 'Turn your knowledge and experience into online courses. Create and sell training courses, track student progress, and build an educational community around your expertise.',
+      cta: language === 'ar' ? 'أنشئ دورتك' : 'Create Your Course',
+      features: [
+        language === 'ar' ? 'إنشاء وبيع الدورات' : 'Create and sell courses',
+        language === 'ar' ? 'تتبع تقدم الطلاب' : 'Track student progress',
+        language === 'ar' ? 'بناء مجتمع تعليمي' : 'Build a learning community'
+      ]
     }
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-16 md:py-24 bg-gradient-to-r from-navy-900 to-indigo-900 text-white">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex justify-between items-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold">
-            {language === 'ar' ? 'جرّب تطبيقاتنا' : 'Try our apps'}
+        <div className="mb-12 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            {language === 'ar' ? 'كل ما تحتاجه لنمو أعمالك' : 'Everything You Need to Grow Your Business'}
           </h2>
-          <p className="text-gray-600">
-            {language === 'ar' ? 'متضمنة مجاناً في كل الباقات.' : 'Included for free in every plan.'}
+          <p className="text-xl text-blue-200 max-w-3xl mx-auto">
+            {language === 'ar' ? 'منصة متكاملة توفر جميع الأدوات اللازمة لتنمية عملك عبر الإنترنت.' : 'An all-in-one platform providing all the tools you need to grow your business online.'}
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {apps.map((app, index) => (
-            <Card 
-              key={index} 
-              className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-shadow duration-300"
-            >
-              <div className={`p-6 ${app.color} bg-opacity-20`}>
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-semibold">{app.title}</h3>
-                  <div className={`p-2 rounded-md ${app.color}`}>
-                    {app.icon}
+        <Tabs defaultValue="funnel" className="w-full max-w-6xl mx-auto">
+          <div className="flex justify-center mb-12">
+            <TabsList className="bg-navy-800/50 p-1 rounded-full">
+              {apps.map((app) => (
+                <TabsTrigger 
+                  key={app.id} 
+                  value={app.id}
+                  className="px-4 py-2 md:px-6 text-sm md:text-base rounded-full data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+                >
+                  {app.title}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </div>
+          
+          {apps.map((app) => (
+            <TabsContent key={app.id} value={app.id} className="mt-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="order-2 md:order-1">
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4">{app.title}</h3>
+                  <p className="text-blue-100 text-lg mb-6">{app.description}</p>
+                  
+                  <ul className="space-y-3 mb-8">
+                    {app.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center mr-3">
+                          <svg 
+                            width="12" 
+                            height="12" 
+                            viewBox="0 0 12 12" 
+                            fill="none" 
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path 
+                              d="M10 3L4.5 8.5L2 6" 
+                              stroke="white" 
+                              strokeWidth="2" 
+                              strokeLinecap="round" 
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <Button 
+                    className="rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 px-8 py-6 h-auto text-base"
+                  >
+                    {app.cta} <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </div>
+                
+                <div className="order-1 md:order-2 bg-navy-800/40 p-6 rounded-xl shadow-2xl">
+                  <div className="aspect-video bg-navy-700/50 rounded-lg flex items-center justify-center relative overflow-hidden">
+                    <Play className="w-16 h-16 text-blue-400" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent"></div>
+                    <p className="absolute bottom-4 text-center w-full text-sm text-blue-200">
+                      {language === 'ar' ? 'انقر لمشاهدة شرح مفصل' : 'Click to watch detailed explanation'}
+                    </p>
+                  </div>
+                  
+                  <div className="mt-6 border border-navy-700/50 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center">
+                        <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
+                          {app.icon}
+                        </div>
+                        <span className="font-semibold">{app.title}</span>
+                      </div>
+                      <Button variant="outline" size="sm" className="bg-transparent border-blue-700 text-blue-300 hover:bg-blue-900/20">
+                        {language === 'ar' ? 'معاينة' : 'Preview'}
+                      </Button>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <div className="h-3 bg-navy-700/60 rounded-full w-full"></div>
+                      <div className="h-3 bg-navy-700/60 rounded-full w-3/4"></div>
+                      <div className="h-3 bg-navy-700/60 rounded-full w-1/2"></div>
+                    </div>
                   </div>
                 </div>
-                <p className="text-gray-600 mb-4 h-12">
-                  {app.description}
-                </p>
-                <CardContent className="p-0">
-                  {app.image}
-                </CardContent>
               </div>
-            </Card>
+            </TabsContent>
           ))}
-        </div>
+        </Tabs>
       </div>
     </section>
   );
