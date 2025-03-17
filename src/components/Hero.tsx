@@ -155,7 +155,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Tabs Content Section */}
+      {/* Tabs Content Section - Updated with less rounded corners */}
       <div className="bg-[#0a0b2e] border-b border-t border-blue-800/20">
         <div className="container mx-auto px-4">
           <Tabs defaultValue="funnel" value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -164,7 +164,7 @@ export default function Hero() {
                 <TabsTrigger
                   key={tab.id}
                   value={tab.id}
-                  className={`px-6 py-3 rounded-md text-base font-medium transition-colors ${
+                  className={`px-6 py-3 rounded-sm text-base font-medium transition-colors ${
                     activeTab === tab.id
                       ? 'bg-blue-500 text-white'
                       : 'bg-white/10 text-gray-300 hover:bg-white/20'
@@ -177,14 +177,14 @@ export default function Hero() {
 
             {tabs.map((tab) => (
               <TabsContent key={tab.id} value={tab.id} className="mt-0">
-                <div className="bg-gray-100 rounded-b-lg">
+                <div className="bg-gray-100 rounded-sm">
                   <div className="container mx-auto">
                     <div className="grid md:grid-cols-2 gap-6 p-8">
                       <div className="flex flex-col justify-center">
                         <h2 className="text-3xl font-bold text-[#0a0b2e] mb-4">{tab.title}</h2>
                         <p className="text-gray-700 mb-8">{tab.description}</p>
                         <Button 
-                          className="w-fit bg-amber-500 hover:bg-amber-600 text-black font-semibold px-8 py-6 h-auto text-base"
+                          className="w-fit bg-amber-500 hover:bg-amber-600 text-black font-semibold px-8 py-6 h-auto text-base rounded-sm"
                         >
                           {language === 'ar' ? 'جرب مجاناً' : 'Try for Free'} 
                           <ArrowRight className="ms-2 h-5 w-5" />
@@ -192,16 +192,16 @@ export default function Hero() {
                       </div>
                       <div className="flex items-center justify-center p-4">
                         {tab.id === 'store' && (
-                          <Card className="w-full max-w-md shadow-lg border-gray-200">
+                          <Card className="w-full max-w-md shadow-lg border-gray-200 rounded-sm">
                             <CardContent className="p-0">
-                              <div className="bg-white p-4 rounded-t-lg">
+                              <div className="bg-white p-4 rounded-t-sm">
                                 <div className="flex items-center gap-3 text-slate-800 font-medium">
                                   <div className="bg-green-100 text-green-600 rounded-full w-6 h-6 flex items-center justify-center text-sm">1</div>
                                   <span>Select Product</span>
                                 </div>
-                                <div className="border rounded-md mt-4 p-3">
+                                <div className="border rounded-sm mt-4 p-3">
                                   <div className="flex gap-3">
-                                    <div className="w-20 h-20 bg-gray-100 rounded flex items-center justify-center">
+                                    <div className="w-20 h-20 bg-gray-100 rounded-sm flex items-center justify-center">
                                       <img 
                                         src="/placeholder.svg" 
                                         alt="Kitchen Gloves"
@@ -216,7 +216,7 @@ export default function Hero() {
                                 </div>
                               </div>
                               <div className="p-4">
-                                <Button className="w-full py-6 bg-green-500 hover:bg-green-600">
+                                <Button className="w-full py-6 bg-green-500 hover:bg-green-600 rounded-sm">
                                   {language === 'ar' ? 'التالي' : 'Next'}
                                 </Button>
                                 <div className="mt-6 space-y-3">
@@ -237,7 +237,7 @@ export default function Hero() {
                           <img 
                             src={tab.image} 
                             alt={tab.title}
-                            className="w-full max-w-md h-auto rounded-lg shadow-lg object-contain"
+                            className="w-full max-w-md h-auto rounded-sm shadow-lg object-contain"
                           />
                         )}
                       </div>
