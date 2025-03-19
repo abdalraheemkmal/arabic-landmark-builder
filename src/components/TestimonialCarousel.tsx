@@ -49,6 +49,18 @@ const TestimonialCarousel = () => {
         name: "فؤاد خالد",
         image: "",
         quote: "باستخدام فنل كليك، أحد الأشياء الرئيسية التي تمكنا من تحقيقها هي إطلاق المزيد والمزيد من المنتجات بشكل أسرع."
+      },
+      {
+        id: 5,
+        name: "ليلى المهندس",
+        image: "",
+        quote: "كنت متخوفة في البداية، لكن واجهة فنل كليك سهلة وبديهية للغاية. خلال أسبوع واحد فقط، تمكنت من إنشاء صفحة هبوط حولت زوار موقعي إلى عملاء بنسبة تجاوزت 30%."
+      },
+      {
+        id: 6,
+        name: "عمر الحكيم",
+        image: "",
+        quote: "أجد صعوبة في التعبير عن مدى تأثير فنل كليك على أعمالي. قبل استخدامه، كنت أكافح للوصول إلى العملاء المناسبين. الآن، أصبح لدي نظام تسويقي آلي يعمل 24 ساعة في اليوم ويجلب عملاء جدد حتى أثناء نومي."
       }
     ],
     en: [
@@ -75,6 +87,18 @@ const TestimonialCarousel = () => {
         name: "Lamar Tyler",
         image: "",
         quote: "By using ClickFunnels one of the main things we've been able to do is launch more and launch more FASTER."
+      },
+      {
+        id: 5,
+        name: "Sarah Johnson",
+        image: "",
+        quote: "I was skeptical at first, but the ClickFunnel interface is incredibly intuitive. Within just one week, I created a landing page that converted site visitors to customers at a rate over 30%."
+      },
+      {
+        id: 6,
+        name: "Michael Chang",
+        image: "",
+        quote: "I struggle to express how much ClickFunnel has impacted my business. Before using it, I was struggling to reach the right customers. Now, I have an automated marketing system working 24 hours a day bringing in new customers even while I sleep."
       }
     ]
   };
@@ -177,7 +201,7 @@ const TestimonialCarousel = () => {
                       <Quote size={120} />
                     </div>
                     
-                    <blockquote className="text-xl md:text-2xl font-medium mb-6 relative z-10 max-w-4xl mx-auto">
+                    <blockquote className="text-xl md:text-2xl font-medium mb-6 relative z-10 max-w-4xl mx-auto text-white">
                       "{testimonial.quote}"
                     </blockquote>
                     
@@ -190,7 +214,7 @@ const TestimonialCarousel = () => {
                       </Avatar>
                       
                       <div className="ml-4">
-                        <div className="font-bold text-lg">{testimonial.name}</div>
+                        <div className="font-bold text-lg text-white">{testimonial.name}</div>
                         <div className="flex items-center text-blue-300">
                           <BadgeCheck className="h-4 w-4 mr-1 text-blue-400" />
                           <span className="text-sm">
