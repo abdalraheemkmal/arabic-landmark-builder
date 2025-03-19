@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import AppsSection from "@/components/AppsSection";
 import Testimonials from "@/components/Testimonials";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -221,6 +222,9 @@ const Index = () => {
         
         {/* Features Section */}
         <Features />
+        
+        {/* New Testimonial Carousel Section */}
+        <TestimonialCarousel />
         
         {/* Testimonials Section */}
         <Testimonials />
