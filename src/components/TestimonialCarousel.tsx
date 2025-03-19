@@ -133,7 +133,7 @@ const TestimonialCarousel = () => {
       handleNext();
     }, 5000);
     return () => clearInterval(interval);
-  }, [activeIndex, isAnimating]);
+  }, [activeIndex, isAnimating, activeTestimonials.length]);
 
   return (
     <section className="py-16 bg-[#0a0b2e] text-white overflow-hidden relative">
@@ -179,7 +179,8 @@ const TestimonialCarousel = () => {
           {/* Testimonial slider */}
           <div 
             ref={testimonialRef} 
-            className="overflow-hidden"
+            className="overflow-hidden relative"
+            style={{ height: "auto", minHeight: "300px" }}
           >
             <div 
               className={cn(
@@ -194,7 +195,7 @@ const TestimonialCarousel = () => {
               {activeTestimonials.map((testimonial) => (
                 <div 
                   key={testimonial.id} 
-                  className="min-w-full px-4"
+                  className="min-w-full flex-shrink-0 px-4"
                 >
                   <Card className="bg-[#151642] border-[#252975] p-8 md:p-10 rounded-sm shadow-xl relative overflow-hidden">
                     <div className="absolute top-6 right-6 text-indigo-400/20">
