@@ -1,10 +1,17 @@
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, Quote, BadgeCheck } from "lucide-react";
+import { Quote, BadgeCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext
+} from "@/components/ui/carousel";
 
 type Testimonial = {
   id: number;
@@ -15,9 +22,6 @@ type Testimonial = {
 
 const TestimonialCarousel = () => {
   const [language, setLanguage] = useState<'ar' | 'en'>('ar');
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const testimonialRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const htmlLang = document.documentElement.lang;
@@ -105,20 +109,6 @@ const TestimonialCarousel = () => {
 
   const activeTestimonials = language === 'ar' ? testimonials.ar : testimonials.en;
 
-  const handleNext = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setActiveIndex((prev) => (prev === activeTestimonials.length - 1 ? 0 : prev + 1));
-    setTimeout(() => setIsAnimating(false), 500);
-  };
-
-  const handlePrev = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setActiveIndex((prev) => (prev === 0 ? activeTestimonials.length - 1 : prev - 1));
-    setTimeout(() => setIsAnimating(false), 500);
-  };
-
   const getInitials = (name: string) => {
     return name
       .split(' ')
@@ -126,14 +116,6 @@ const TestimonialCarousel = () => {
       .join('')
       .toUpperCase();
   };
-
-  // Auto slide every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [activeIndex, isAnimating, activeTestimonials.length]);
 
   return (
     <section className="py-16 bg-[#0a0b2e] text-white overflow-hidden relative">
@@ -158,46 +140,17 @@ const TestimonialCarousel = () => {
           </p>
         </div>
 
-        <div className="relative">
-          {/* Navigation buttons */}
-          <button 
-            onClick={handlePrev}
-            className="absolute top-1/2 -translate-y-1/2 left-0 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors"
-            aria-label={language === 'ar' ? 'السابق' : 'Previous'}
+        <div className="relative mx-auto max-w-5xl">
+          <Carousel className="w-full"
+            opts={{
+              align: "start",
+              loop: true,
+            }}
           >
-            <ChevronLeft className="h-6 w-6" />
-          </button>
-          
-          <button 
-            onClick={handleNext}
-            className="absolute top-1/2 -translate-y-1/2 right-0 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors"
-            aria-label={language === 'ar' ? 'التالي' : 'Next'}
-          >
-            <ChevronRight className="h-6 w-6" />
-          </button>
-          
-          {/* Testimonial slider */}
-          <div 
-            ref={testimonialRef} 
-            className="overflow-hidden relative"
-            style={{ height: "auto", minHeight: "300px" }}
-          >
-            <div 
-              className={cn(
-                "flex transition-transform duration-500 ease-out",
-                isAnimating ? "opacity-90" : "opacity-100"
-              )}
-              style={{ 
-                transform: `translateX(${-activeIndex * 100}%)`,
-                direction: language === 'ar' ? 'rtl' : 'ltr'
-              }}
-            >
+            <CarouselContent className={language === 'ar' ? 'rtl' : 'ltr'}>
               {activeTestimonials.map((testimonial) => (
-                <div 
-                  key={testimonial.id} 
-                  className="min-w-full flex-shrink-0 px-4"
-                >
-                  <Card className="bg-[#151642] border-[#252975] p-8 md:p-10 rounded-sm shadow-xl relative overflow-hidden">
+                <CarouselItem key={testimonial.id} className="md:basis-1/1 lg:basis-1/1">
+                  <Card className="bg-[#151642] border-[#252975] p-8 md:p-10 rounded-sm shadow-xl relative overflow-hidden mx-4">
                     <div className="absolute top-6 right-6 text-indigo-400/20">
                       <Quote size={120} />
                     </div>
@@ -225,24 +178,22 @@ const TestimonialCarousel = () => {
                       </div>
                     </div>
                   </Card>
-                </div>
+                </CarouselItem>
               ))}
+            </CarouselContent>
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <CarouselPrevious className="static h-10 w-10 bg-white/10 hover:bg-white/20 text-white border-none" />
+              <CarouselNext className="static h-10 w-10 bg-white/10 hover:bg-white/20 text-white border-none" />
             </div>
-          </div>
+          </Carousel>
           
           {/* Indicators */}
           <div className="flex justify-center mt-6 space-x-2">
             {activeTestimonials.map((_, index) => (
               <button
                 key={index}
-                onClick={() => {
-                  if (isAnimating) return;
-                  setIsAnimating(true);
-                  setActiveIndex(index);
-                  setTimeout(() => setIsAnimating(false), 500);
-                }}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === activeIndex ? "bg-blue-500 w-6" : "bg-white/30 hover:bg-white/50"
+                  index === 0 ? "bg-blue-500 w-6" : "bg-white/30 hover:bg-white/50"
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
