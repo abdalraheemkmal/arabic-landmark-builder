@@ -28,10 +28,9 @@ const Navbar = () => {
   }, [language]);
 
   const navLinks = [
-    { name: language === 'ar' ? 'الرئيسية' : 'Home', href: '/' },
-    { name: language === 'ar' ? 'الميزات' : 'Features', href: '/#features' },
+    { name: language === 'ar' ? 'تطبيقاتنا' : 'Our Apps', href: '/#apps' },
+    { name: language === 'ar' ? 'تسجيل الدخول' : 'Login', href: '/login' },
     { name: language === 'ar' ? 'الأسعار' : 'Pricing', href: '/#pricing' },
-    { name: language === 'ar' ? 'تواصل معنا' : 'Contact', href: '/#contact' },
   ];
 
   return (
