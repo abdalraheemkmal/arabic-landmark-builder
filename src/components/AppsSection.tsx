@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -43,7 +42,7 @@ const AppsSection = () => {
     title: language === 'ar' ? 'التسويق عبر البريد الإلكتروني' : 'Your Email Marketing',
     icon: <FileText className="h-5 w-5" />,
     color: 'bg-green-100',
-    description: language === 'ar' ? 'أرسل رسائل بريد إلكتروني مستهدفة لجمهورك المناسب في الوقت المناسب. قم بإنشاء حملات بريد إلكتروني تلقائية، وقياس النتائج، وتحسين معدلات الفتح والنقر.' : 'Send targeted emails to the right audience at the right time. Create automated email campaigns, measure results, and improve open and click-through rates.',
+    description: language === 'ar' ? 'أرسل رسائل بريد إلكتروني مستهدفة لجمهور�� المناسب في الوقت المناسب. قم بإنشاء حملات بريد إلكتروني تلقائية، وقياس النتائج، وتحسين معدلات الفتح والنقر.' : 'Send targeted emails to the right audience at the right time. Create automated email campaigns, measure results, and improve open and click-through rates.',
     cta: language === 'ar' ? 'أرسل حملتك الأولى' : 'Send Your First Campaign',
     features: [language === 'ar' ? 'رسائل بريد إلكتروني مستهدفة' : 'Targeted emails', language === 'ar' ? 'حملات تلقائية' : 'Automated campaigns', language === 'ar' ? 'تحليلات مفصلة' : 'Detailed analytics']
   }, {
@@ -89,7 +88,7 @@ const AppsSection = () => {
       name: language === 'ar' ? 'لامار تايلر' : 'Lamar Tyler',
       role: language === 'ar' ? 'مدير تنفيذي' : 'CEO',
       content: language === 'ar' 
-        ? 'باستخدام فنل كليك، أحد الأشياء الرئيسية التي تمكنا من تحقيقها هي إطلاق المزيد والمزيد من المنتجات بشكل أسرع وأكثر فاعلية مما كنا نتوقع.'
+        ? 'باستخدام فنل كليك، أحد الأشياء الرئيسية التي تمكنا من تحقيقها ��ي إطلاق المزيد والمزيد من المنتجات بشكل أسرع وأكثر فاعلية مما كنا نتوقع.'
         : 'By using ClickFunnels, one of the main advantages we\'ve experienced is the ability to launch more products and do it FASTER than we ever thought possible. The ROI has been incredible.',
       avatar: '',
     },
@@ -113,16 +112,16 @@ const AppsSection = () => {
   };
   
   return (
-    <section id="apps" className="py-16 md:py-24 bg-gradient-to-b from-primary/10 to-background">
+    <section id="apps" className="pt-8 bg-[#0a0b2e] text-white">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <span className="inline-block mb-2 px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full">
             {language === 'ar' ? 'تطبيقاتنا' : 'Our Apps'}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
             {language === 'ar' ? 'كل ما تحتاج لتنمية عملك' : 'Everything You Need To Grow Your Business'}
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
             {language === 'ar' ? 'مجموعة متكاملة من الأدوات المصممة خصيصًا لمساعدتك في إدارة وتنمية عملك عبر الإنترنت بسهولة.' : 'A complete set of tools specially designed to help you manage and grow your online business with ease.'}
           </p>
         </div>
@@ -145,24 +144,24 @@ const AppsSection = () => {
           
           {apps.map((app) => (
             <TabsContent key={app.id} value={app.id} className="focus-visible:outline-none focus-visible:ring-0">
-              <Card className="p-6 md:p-8 border-none shadow-lg bg-white rounded-2xl">
+              <Card className="p-6 md:p-8 border-none shadow-lg bg-white/10 backdrop-blur-sm rounded-2xl">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                   <div>
                     <div className={`${app.color} w-12 h-12 flex items-center justify-center rounded-lg mb-4`}>
                       {app.icon}
                     </div>
-                    <h3 className="text-2xl font-bold mb-3">{app.title}</h3>
-                    <p className="text-gray-600 mb-6">{app.description}</p>
+                    <h3 className="text-2xl font-bold mb-3 text-white">{app.title}</h3>
+                    <p className="text-gray-300 mb-6">{app.description}</p>
                     
                     <div className="space-y-3 mb-6">
                       {app.features.map((feature, index) => (
                         <div key={index} className="flex items-center gap-2">
-                          <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                          <div className="w-5 h-5 rounded-full bg-primary/20 text-primary flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                               <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                           </div>
-                          <span>{feature}</span>
+                          <span className="text-gray-200">{feature}</span>
                         </div>
                       ))}
                     </div>
@@ -173,7 +172,7 @@ const AppsSection = () => {
                   </div>
                   
                   <div className="hidden md:flex justify-center">
-                    <div className="w-full max-w-sm aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+                    <div className="w-full max-w-sm aspect-video bg-gray-800/40 rounded-lg flex items-center justify-center">
                       <Play className="h-12 w-12 text-primary opacity-70" />
                     </div>
                   </div>
@@ -184,12 +183,12 @@ const AppsSection = () => {
         </Tabs>
 
         {/* Testimonials Section */}
-        <div className="mt-24">
+        <div className="mt-20 mb-16">
           <div className="text-center mb-12">
             <span className="inline-block mb-2 px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full">
               {language === 'ar' ? 'آراء العملاء' : 'Testimonials'}
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
               {language === 'ar' ? 'ماذا يقول عملاؤنا عن خدماتنا' : 'What Our Customers Say About Us'}
             </h2>
           </div>

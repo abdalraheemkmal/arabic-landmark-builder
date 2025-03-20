@@ -37,7 +37,7 @@ const Navbar = () => {
     <nav 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/70 backdrop-blur-lg shadow-sm py-3' 
+          ? 'bg-white/10 backdrop-blur-lg shadow-sm py-3' 
           : 'bg-transparent py-5'
       }`}
     >
@@ -55,19 +55,21 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.href}
-              className="text-white hover:text-white/80 transition-colors duration-300 font-medium relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
-            </Link>
-          ))}
+        <div className="hidden md:flex items-center space-x-0">
+          <div className="flex space-x-0">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.href}
+                className="text-white hover:text-white/80 transition-colors duration-300 font-medium relative group px-6"
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
+              </Link>
+            ))}
+          </div>
           
-          <div className="relative group px-1">
+          <div className="relative group px-6">
             <button
               className="flex items-center text-white hover:text-white/80 transition-colors duration-300 font-medium"
             >
