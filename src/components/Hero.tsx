@@ -38,8 +38,8 @@ export default function Hero() {
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <div className="absolute top-0 left-0 w-1/3 h-screen bg-gradient-to-b from-blue-400/20 to-transparent transform -rotate-30 opacity-40"></div>
         <div className="absolute top-0 right-0 w-1/3 h-screen bg-gradient-to-b from-purple-400/20 to-transparent transform rotate-30 opacity-40"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-screen bg-gradient-to-t from-red-400/20 to-transparent transform -rotate-30 opacity-30"></div>
-        <div className="absolute bottom-0 right-0 w-1/3 h-screen bg-gradient-to-t from-amber-400/20 to-transparent transform rotate-30 opacity-30"></div>
+        <div className="absolute bottom-0 left-0 w-1/3 h-screen bg-gradient-to-b from-red-400/20 to-transparent transform -rotate-30 opacity-30"></div>
+        <div className="absolute bottom-0 right-0 w-1/3 h-screen bg-gradient-to-b from-amber-400/20 to-transparent transform rotate-30 opacity-30"></div>
       </div>
 
       {/* Main hero section */}
@@ -94,10 +94,7 @@ export default function Hero() {
             </Link>
           </p>
           
-          {/* Logos Section - Brands that trust us */}
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 mt-16">
-            <img src="/lovable-uploads/bdcdda72-677d-49e1-b289-8c4b40089af3.png" alt="Trusted companies" className="max-w-full h-auto" />
-          </div>
+          {/* Logos section has been removed as requested */}
         </div>
       </div>
     </div>
