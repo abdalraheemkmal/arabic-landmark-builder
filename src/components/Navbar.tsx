@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -47,12 +46,12 @@ const Navbar = () => {
         {/* Logo */}
         <Link 
           to="/" 
-          className="text-2xl font-bold text-primary relative group flex items-center"
+          className="text-2xl font-bold text-white relative group flex items-center"
         >
           <span className="mr-2 text-3xl">⚡</span>
           <span className="relative">
             {language === 'ar' ? 'فنل كليك' : 'ClickFunnel'}
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
           </span>
         </Link>
 
@@ -62,16 +61,16 @@ const Navbar = () => {
             <Link
               key={link.name}
               to={link.href}
-              className="text-gray-700 hover:text-primary transition-colors duration-300 font-medium relative group"
+              className="text-white hover:text-white/80 transition-colors duration-300 font-medium relative group"
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
             </Link>
           ))}
           
           <div className="relative group px-1">
             <button
-              className="flex items-center text-gray-700 hover:text-primary transition-colors duration-300 font-medium"
+              className="flex items-center text-white hover:text-white/80 transition-colors duration-300 font-medium"
             >
               {language === 'ar' ? 'اللغة' : 'Language'} <ChevronDown className="ml-1 h-4 w-4" />
             </button>
@@ -88,18 +87,9 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Call to action */}
-        <div className="hidden md:block">
-          <Button asChild className="btn-primary rounded-full">
-            <Link to="/builder">
-              {language === 'ar' ? 'إنشاء صفحة هبوط' : 'Create Landing Page'}
-            </Link>
-          </Button>
-        </div>
-
         {/* Mobile menu toggle */}
         <button 
-          className="md:hidden text-gray-700 hover:text-primary transition-colors"
+          className="md:hidden text-white hover:text-white/80 transition-colors"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -129,11 +119,6 @@ const Navbar = () => {
           >
             {language === 'ar' ? 'English' : 'العربية'}
           </button>
-          <Button asChild className="btn-primary rounded-full w-full">
-            <Link to="/builder" onClick={() => setMobileMenuOpen(false)}>
-              {language === 'ar' ? 'إنشاء صفحة هبوط' : 'Create Landing Page'}
-            </Link>
-          </Button>
         </div>
       </div>
     </nav>

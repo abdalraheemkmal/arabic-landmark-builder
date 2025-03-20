@@ -3,11 +3,11 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import AppsSection from "@/components/AppsSection";
-import Testimonials from "@/components/Testimonials";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+
 const PricingPlan = ({
   title,
   price,
@@ -55,6 +55,7 @@ const PricingPlan = ({
       </Button>
     </div>;
 };
+
 const Index = () => {
   const [language, setLanguage] = useState<'ar' | 'en'>('ar');
   useEffect(() => {
@@ -174,9 +175,6 @@ const Index = () => {
         
         {/* New Testimonial Carousel Section */}
         <TestimonialCarousel />
-        
-        {/* Testimonials Section */}
-        <Testimonials />
         
         {/* Pricing Section */}
         <section id="pricing" className="py-16 md:py-24 bg-accent/30 relative">
@@ -302,4 +300,5 @@ const Index = () => {
       </footer>
     </div>;
 };
+
 export default Index;

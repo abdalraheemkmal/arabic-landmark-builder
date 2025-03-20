@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import Testimonials from "@/components/Testimonials";
 
 export default function Hero() {
   const [language, setLanguage] = useState<'ar' | 'en'>('ar');
@@ -152,6 +153,9 @@ export default function Hero() {
               </Link>
             </p>
           </div>
+
+          {/* Adding Testimonials right below the hero content */}
+          <Testimonials />
         </div>
       </div>
 
