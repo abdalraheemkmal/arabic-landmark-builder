@@ -61,17 +61,17 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.href}
-                className="text-white hover:text-white/80 transition-colors duration-300 font-medium relative group px-6"
+                className="text-white hover:text-[#8babd8] transition-colors duration-300 font-medium relative group px-6"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#8babd8] group-hover:w-full transition-all duration-300"></span>
               </Link>
             ))}
           </div>
           
           <div className="relative group px-6">
             <button
-              className="flex items-center text-white hover:text-white/80 transition-colors duration-300 font-medium"
+              className="flex items-center text-white hover:text-[#8babd8] transition-colors duration-300 font-medium"
             >
               {language === 'ar' ? 'اللغة' : 'Language'} <ChevronDown className="ml-1 h-4 w-4" />
             </button>
@@ -90,7 +90,7 @@ const Navbar = () => {
 
         {/* Mobile menu toggle */}
         <button 
-          className="md:hidden text-white hover:text-white/80 transition-colors"
+          className="md:hidden text-white hover:text-[#8babd8] transition-colors"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -108,7 +108,7 @@ const Navbar = () => {
             <Link
               key={link.name}
               to={link.href}
-              className="block py-2 text-gray-700 hover:text-primary transition-colors"
+              className="block py-2 text-gray-700 hover:text-[#8babd8] transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               {link.name}
@@ -116,7 +116,7 @@ const Navbar = () => {
           ))}
           <button
             onClick={toggleLanguage}
-            className="block py-2 text-gray-700 hover:text-primary transition-colors"
+            className="block py-2 text-gray-700 hover:text-[#8babd8] transition-colors"
           >
             {language === 'ar' ? 'English' : 'العربية'}
           </button>

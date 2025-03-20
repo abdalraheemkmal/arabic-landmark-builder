@@ -37,7 +37,7 @@ export default function Hero() {
       {/* Decorative gradient elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <div className="absolute top-0 left-0 w-1/3 h-screen bg-gradient-to-b from-blue-400/20 to-transparent transform -rotate-30 opacity-40"></div>
-        <div className="absolute top-0 right-0 w-1/3 h-screen bg-gradient-to-b from-purple-400/20 to-transparent transform rotate-30 opacity-40"></div>
+        <div className="absolute top-0 right-0 w-1/3 h-screen bg-gradient-to-b from-blue-400/20 to-transparent transform rotate-30 opacity-40"></div>
         <div className="absolute bottom-0 left-0 w-1/3 h-screen bg-gradient-to-b from-red-400/20 to-transparent transform -rotate-30 opacity-30"></div>
         <div className="absolute bottom-0 right-0 w-1/3 h-screen bg-gradient-to-b from-amber-400/20 to-transparent transform rotate-30 opacity-30"></div>
       </div>
@@ -77,7 +77,7 @@ export default function Hero() {
               />
               <Button 
                 type="submit"
-                className="h-12 bg-amber-500 hover:bg-amber-600 text-black font-semibold px-6"
+                className="h-12 bg-[#8babd8] hover:bg-[#7a9bc8] text-black font-semibold px-6"
               >
                 {language === 'ar' ? 'ابدأ الآن' : 'Get Started'} 
                 <ArrowRight className="ms-2 h-5 w-5" />
@@ -89,12 +89,10 @@ export default function Hero() {
             {language === 'ar' 
               ? 'غير جاهز للبدء؟ ' 
               : 'Not ready to get started? '}
-            <Link to="#learn-more" className="text-blue-300 hover:underline">
+            <Link to="#learn-more" className="text-[#8babd8] hover:underline">
               {language === 'ar' ? 'تعرف على المزيد' : 'Learn More'}
             </Link>
           </p>
-          
-          {/* Logos section has been removed as requested */}
         </div>
       </div>
     </div>
