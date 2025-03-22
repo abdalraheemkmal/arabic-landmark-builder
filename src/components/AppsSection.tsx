@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -119,7 +118,7 @@ const AppsSection = () => {
           <span className="inline-block mb-2 px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full">
             {language === 'ar' ? 'تطبيقاتنا' : 'Our Apps'}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white w-full max-w-3xl mx-auto leading-relaxed">
             {language === 'ar' ? 'كل ما تحتاج لتنمية عملك' : 'Everything You Need To Grow Your Business'}
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
@@ -183,13 +182,12 @@ const AppsSection = () => {
           ))}
         </Tabs>
 
-        {/* Testimonials Section */}
         <div className="mt-16 mb-16">
           <div className="text-center mb-12">
             <span className="inline-block mb-2 px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full">
               {language === 'ar' ? 'آراء العملاء' : 'Testimonials'}
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white w-full max-w-3xl mx-auto leading-relaxed">
               {language === 'ar' ? 'ماذا يقول عملاؤنا عن خدماتنا' : 'What Our Customers Say About Us'}
             </h2>
           </div>
