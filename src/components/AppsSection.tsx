@@ -42,7 +42,7 @@ const AppsSection = () => {
     title: language === 'ar' ? 'التسويق عبر البريد الإلكتروني' : 'Your Email Marketing',
     icon: <FileText className="h-5 w-5" />,
     color: 'bg-green-100',
-    description: language === 'ar' ? 'أرسل رسائل بريد إلكتروني مستهدفة لجمهور�� المناسب في الوقت المناسب. قم بإنشاء حملات بريد إلكتروني تلقائية، وقياس النتائج، وتحسين معدلات الفتح والنقر.' : 'Send targeted emails to the right audience at the right time. Create automated email campaigns, measure results, and improve open and click-through rates.',
+    description: language === 'ar' ? 'أرسل رسائل بريد إلكتروني مستهدفة لجمهور���� المناسب في الوقت المناسب. قم بإنشاء حملات بريد إلكتروني تلقائية، وقياس النتائج، وتحسين معدلات الفتح والنقر.' : 'Send targeted emails to the right audience at the right time. Create automated email campaigns, measure results, and improve open and click-through rates.',
     cta: language === 'ar' ? 'أرسل حملتك الأولى' : 'Send Your First Campaign',
     features: [language === 'ar' ? 'رسائل بريد إلكتروني مستهدفة' : 'Targeted emails', language === 'ar' ? 'حملات تلقائية' : 'Automated campaigns', language === 'ar' ? 'تحليلات مفصلة' : 'Detailed analytics']
   }, {
@@ -112,7 +112,7 @@ const AppsSection = () => {
   };
   
   return (
-    <section id="apps" className="pt-8 bg-[#0a0b2e] text-white">
+    <section id="apps" className="pt-0 -mt-16 bg-[#0a0b2e] text-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
           <span className="inline-block mb-2 px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full">
@@ -183,7 +183,7 @@ const AppsSection = () => {
         </Tabs>
 
         {/* Testimonials Section */}
-        <div className="mt-20 mb-16">
+        <div className="mt-16 mb-16">
           <div className="text-center mb-12">
             <span className="inline-block mb-2 px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full">
               {language === 'ar' ? 'آراء العملاء' : 'Testimonials'}

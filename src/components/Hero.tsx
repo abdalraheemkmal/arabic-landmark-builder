@@ -1,4 +1,3 @@
-
 import { useState, useEffect, FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -33,7 +32,7 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative min-h-[80vh] overflow-hidden bg-[#0a0b2e] flex flex-col items-center">
+    <div className="relative min-h-[70vh] overflow-hidden bg-[#0a0b2e] flex flex-col items-center">
       {/* Decorative gradient elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <div className="absolute top-0 left-0 w-1/3 h-screen bg-gradient-to-b from-blue-400/20 to-transparent transform -rotate-30 opacity-40"></div>
@@ -43,7 +42,7 @@ export default function Hero() {
       </div>
 
       {/* Main hero section */}
-      <div className="container mx-auto px-4 py-20 md:py-32 z-10 text-center">
+      <div className="container mx-auto px-4 py-16 md:py-24 z-10 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
             {language === 'ar' ? (
