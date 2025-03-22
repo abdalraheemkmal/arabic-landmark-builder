@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -42,7 +43,7 @@ const AppsSection = () => {
     title: language === 'ar' ? 'التسويق عبر البريد الإلكتروني' : 'Your Email Marketing',
     icon: <FileText className="h-5 w-5" />,
     color: 'bg-green-100',
-    description: language === 'ar' ? 'أرسل رسائل بريد إلكتروني مستهدفة لجمهور���� المناسب في الوقت المناسب. قم بإنشاء حملات بريد إلكتروني تلقائية، وقياس النتائج، وتحسين معدلات الفتح والنقر.' : 'Send targeted emails to the right audience at the right time. Create automated email campaigns, measure results, and improve open and click-through rates.',
+    description: language === 'ar' ? 'أرسل رسائل بريد إلكتروني مستهدفة للجمهور المناسب في الوقت المناسب. قم بإنشاء حملات بريد إلكتروني تلقائية، وقياس النتائج، وتحسين معدلات الفتح والنقر.' : 'Send targeted emails to the right audience at the right time. Create automated email campaigns, measure results, and improve open and click-through rates.',
     cta: language === 'ar' ? 'أرسل حملتك الأولى' : 'Send Your First Campaign',
     features: [language === 'ar' ? 'رسائل بريد إلكتروني مستهدفة' : 'Targeted emails', language === 'ar' ? 'حملات تلقائية' : 'Automated campaigns', language === 'ar' ? 'تحليلات مفصلة' : 'Detailed analytics']
   }, {
