@@ -118,7 +118,7 @@ const AppsSection = () => {
           <span className="inline-block mb-2 px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full">
             {language === 'ar' ? 'تطبيقاتنا' : 'Our Apps'}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white w-full max-w-3xl mx-auto leading-relaxed">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white w-full max-w-3xl mx-auto leading-relaxed drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">
             {language === 'ar' ? 'كل ما تحتاج لتنمية عملك' : 'Everything You Need To Grow Your Business'}
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
@@ -150,7 +150,9 @@ const AppsSection = () => {
                     <div className={`${app.color} w-12 h-12 flex items-center justify-center rounded-lg mb-4`}>
                       {app.icon}
                     </div>
-                    <h3 className="text-2xl font-bold mb-3 text-white">{app.title}</h3>
+                    <h3 className="text-2xl font-bold mb-3 text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]">
+                      {app.title}
+                    </h3>
                     <p className="text-gray-300 mb-6">{app.description}</p>
                     
                     <div className="space-y-3 mb-6">
@@ -187,7 +189,7 @@ const AppsSection = () => {
             <span className="inline-block mb-2 px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full">
               {language === 'ar' ? 'آراء العملاء' : 'Testimonials'}
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white w-full max-w-3xl mx-auto leading-relaxed">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white w-full max-w-3xl mx-auto leading-relaxed drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">
               {language === 'ar' ? 'ماذا يقول عملاؤنا عن خدماتنا' : 'What Our Customers Say About Us'}
             </h2>
           </div>
