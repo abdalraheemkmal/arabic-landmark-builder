@@ -1,3 +1,4 @@
+
 import { useState, useEffect, FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -8,12 +9,25 @@ import { toast } from "sonner";
 export default function Hero() {
   const [language, setLanguage] = useState<'ar' | 'en'>('ar');
   const [email, setEmail] = useState('');
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  
+  const arPhrases = ["بدء عملك التجاري", "تحقيق مبيعاتك الأولى", "ترك الوظيفة", "العمل بالبجامة"];
+  const enPhrases = ["starting your business", "making your first sales", "quitting your job", "working in pajamas"];
 
   // Set language based on document's lang attribute
   useEffect(() => {
     const htmlLang = document.documentElement.lang;
     setLanguage(htmlLang === 'en' ? 'en' : 'ar');
   }, []);
+
+  // Rotate through phrases
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPhraseIndex(prev => (prev + 1) % (language === 'ar' ? arPhrases.length : enPhrases.length));
+    }, 3000);
+    
+    return () => clearInterval(interval);
+  }, [language]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -47,21 +61,25 @@ export default function Hero() {
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
             {language === 'ar' ? (
               <>
-                <span className="block mb-4">أنت على بُعد قمع واحد</span>
-                <span className="block text-[#8babd8]">من تحقيق أهدافك</span>
+                <span className="block mb-4">أنت على بُعد صفحة واحدة من</span>
+                <span className="block text-[#8babd8] min-h-[1.5em] transition-all duration-500">
+                  {arPhrases[currentPhraseIndex]}
+                </span>
               </>
             ) : (
               <>
-                <span className="block mb-4">You're one funnel away</span>
-                <span className="block text-[#8babd8]">from reaching your goals</span>
+                <span className="block mb-4">You're one page away from</span>
+                <span className="block text-[#8babd8] min-h-[1.5em] transition-all duration-500">
+                  {enPhrases[currentPhraseIndex]}
+                </span>
               </>
             )}
           </h1>
           
           <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
             {language === 'ar' 
-              ? 'ابدأ اليوم مجانًا وأنشئ صفحات قمع تسويقية احترافية لزيادة مبيعاتك.' 
-              : 'Start for free today and create professional marketing funnels to increase your sales.'}
+              ? 'احصل على خطتك التسويقية مجانا الان' 
+              : 'Get your marketing plan for free now'}
           </p>
 
           {/* Email form */}
